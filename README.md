@@ -1,0 +1,2 @@
+# nix
+Nixos Configurations
