@@ -4,7 +4,6 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./system-specific.nix
     ];
 
   # Bootloader
@@ -19,7 +18,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
     LC_IDENTIFICATION = "en_GB.UTF-8";
@@ -32,7 +30,8 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system. (x session is still wayland)
+  # Enable the X11 windowing system.
+  # (the X server implementation is left to the display manager, gdm uses wayland)
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
@@ -40,7 +39,7 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
-  # remove default packages
+  # remove some default packages
   environment.gnome.excludePackages = with pkgs; [
      gnome-maps
      gnome-weather
@@ -81,10 +80,9 @@
   };
 
   services.fwupd.enable = true;
-  # services.fwupd.daemonSettings.DisabledPlugins = [ "synaptics_mst" ];
   services.fwupd.extraRemotes = [ "lvfs-testing" ];
 
-  # https://community.frame.work/t/framework-nixos-linux-users-self-help/31426/55
+  # Power Optimisations
   powerManagement.powertop.enable = true;
   services.fstrim.enable = true;
 
@@ -157,11 +155,5 @@
   systemd.services.podman.enable = false;
   systemd.sockets.podman.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11";
 }
