@@ -8,6 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     firefox-addons.url = "git+https://gitlab.com/rycee/nur-expressions.git?dir=/pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = {
@@ -22,8 +23,6 @@
     packages = import ./pkgs nixpkgs.legacyPackages.${system};
     formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -33,15 +32,6 @@
         modules = [
           ./nixos/configuration.nix
           ./nixos/systems/highwind
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jonathan = {
-              home.stateVersion = "23.11";
-              programs.home-manager.enable = true;
-            };
-          }
         ];
       };
     };
@@ -54,6 +44,7 @@
         extraSpecialArgs = { inherit inputs outputs system; };
         modules = [
           ./home-manager/home.nix
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ./home-manager/users/jonathan
         ];
       };

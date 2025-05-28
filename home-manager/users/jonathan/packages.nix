@@ -1,4 +1,10 @@
 { pkgs, ... }: {
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "com.usebottles.bottles"
+    "com.github.tchx84.Flatseal"
+  ];
+  services.flatpak.uninstallUnmanaged = true;
   home.packages = with pkgs; [
     # communcation
     discord
