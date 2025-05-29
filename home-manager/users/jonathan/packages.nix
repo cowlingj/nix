@@ -6,6 +6,10 @@
   ];
   services.flatpak.uninstallUnmanaged = true;
   programs.zsh.enable = true;
+  programs.zsh.initContent = ''
+    bindkey -v
+    bindkey '^R' history-incremental-search-backward
+  '';
   programs.vim = {
     enable = true;
     defaultEditor = true;
