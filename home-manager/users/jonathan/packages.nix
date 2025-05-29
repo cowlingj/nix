@@ -5,6 +5,11 @@
     "com.github.tchx84.Flatseal"
   ];
   services.flatpak.uninstallUnmanaged = true;
+  programs.zsh.enable = true;
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
   home.packages = with pkgs; [
     # communcation
     discord

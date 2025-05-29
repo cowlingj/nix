@@ -12,7 +12,6 @@
   home.homeDirectory = "/home/jonathan";
 
   home.sessionVariables = {
-    EDITOR = "vim";
     DOCKER_HOST = "unix://1000/podman/podman.sock";
     SSH_AUTH_SOCK="/home/jonathan/.bitwarden-ssh-agent.sock";
   };
