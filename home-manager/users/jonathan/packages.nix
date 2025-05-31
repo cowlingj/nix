@@ -3,6 +3,7 @@
   services.flatpak.packages = [
     "com.usebottles.bottles"
     "com.github.tchx84.Flatseal"
+    "com.bambulab.BambuStudio"
   ];
   services.flatpak.uninstallUnmanaged = true;
   programs.zsh.enable = true;
@@ -37,7 +38,7 @@
     lunacy
 
     # emulation    
-    bottles
+    # bottles
     pcsx2
 
     # design
@@ -46,6 +47,6 @@
     openscad
     godot_4
     blender
-    bambu-studio
+    # bambu-studio
   ];
 }
