@@ -33,6 +33,7 @@
     pdfarranger
     evince
     libreoffice-still
+    flatpak
 
     # privacy
     bitwarden-desktop

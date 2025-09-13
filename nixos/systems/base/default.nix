@@ -61,7 +61,6 @@
       totem
       gnome-tour
       gnome-user-docs
-      gnome-software
       gnome-weather
       gnome-maps
       gnome-contacts

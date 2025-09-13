@@ -96,6 +96,21 @@
             ./home-manager/users/claudia
           ];
         };
-      };
+      "claudia@coffee" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit
+              inputs
+              outputs
+              system
+              secrets
+              ;
+          };
+          modules = [
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
+            ./home-manager/users/base
+            ./home-manager/users/claudia
+          ];
+        };
     };
 }
