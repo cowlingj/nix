@@ -13,12 +13,12 @@
       Unit = "duck-dns.service";
     };
   };
-  systemd.user.services."duck-dns" = let secrets = import ./duck-dns.secret.nix; in {
+  systemd.user.services."duck-dns" = let token = import ./duck-dns.token.nix; in {
     Service = {
       Type = "oneshot";
       ExecStart = "${pkgs.writeShellScript "update-ddns" ''
         set -eu
-        ${pkgs.curl}/bin/curl "https://www.duckdns.org/update?domains=traverse-town&token=${secrets.duck-dns.token}&ip="
+        ${pkgs.curl}/bin/curl "https://www.duckdns.org/update?domains=traverse-town&token=${token}&ip="
       ''}";
     };
 
