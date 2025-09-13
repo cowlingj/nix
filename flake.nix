@@ -21,7 +21,6 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      secrets = import ./secrets;
     in
     {
       formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
@@ -31,7 +30,7 @@
       nixosConfigurations = {
         "highwind" = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs secrets;
+            inherit inputs outputs;
             hostname = "highwind";
           };
           modules = [
@@ -41,7 +40,7 @@
         };
         "tempest" = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs secrets;
+            inherit inputs outputs;
             hostname = "tempest";
           };
           modules = [
@@ -51,7 +50,7 @@
         };
         "coffee" = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs secrets;
+            inherit inputs outputs;
             hostname = "coffee";
           };
           modules = [
@@ -71,7 +70,6 @@
               inputs
               outputs
               system
-              secrets
               ;
           };
           modules = [
@@ -87,7 +85,6 @@
               inputs
               outputs
               system
-              secrets
               ;
           };
           modules = [
@@ -96,14 +93,13 @@
             ./home-manager/users/claudia
           ];
         };
-      "claudia@coffee" = home-manager.lib.homeManagerConfiguration {
+        "claudia@coffee" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit
               inputs
               outputs
               system
-              secrets
               ;
           };
           modules = [
@@ -112,5 +108,6 @@
             ./home-manager/users/claudia
           ];
         };
+      };
     };
 }
