@@ -1,11 +1,11 @@
 { pkgs, ... }: {
+  programs.firefox.enable = true;
   services.flatpak.enable = true;
   services.flatpak.packages = [
-    "com.usebottles.bottles"
     "com.github.tchx84.Flatseal"
     "com.bambulab.BambuStudio"
   ];
-  services.flatpak.uninstallUnmanaged = true;
+  services.flatpak.uninstallUnmanaged = false;
   programs.zsh.enable = true;
   programs.zsh.initContent = ''
     bindkey -v
@@ -19,45 +19,36 @@
     # communcation
     discord
     discover-overlay
+    signal-desktop
     
     # utility
-    google-chrome
+    firefox
     obsidian
-    unar
-    p7zip-rar
-    xarchiver
+    notion-app
     curl
     protonvpn-gui
     libwacom
-    showtime
+    vlc
+    cabibre
+    pdfarranger
+    evince
+    libreoffice-still
 
     # privacy
     bitwarden-desktop
     bitwarden-cli
-    encfs
-    gencfsm
 
     # development
     vscode
-    bruno
-    bruno-cli
-    podman
-    podman-desktop
-    podman-compose
-    lunacy
-
-    # emulation
-    pcsx2
 
     # design
     krita
-    freecad
-    openscad
-    godot_4
-    blender
-    pixelorama
 
-    # games
-    prismlauncher
+    # remote file handling
+    qbittorrent
+    unar
+    p7zip-rar
+    xarchiver
+    dropbox
   ];
 }

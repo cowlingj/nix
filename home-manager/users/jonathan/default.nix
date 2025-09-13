@@ -1,10 +1,16 @@
-
-
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ./firefox.nix
     ./packages.nix
     ./github.nix
+    # ./sirikali.nix
+    ./duck-dns.nix
   ];
 
   programs.home-manager.enable = true;
@@ -13,7 +19,7 @@
 
   home.sessionVariables = {
     DOCKER_HOST = "unix://1000/podman/podman.sock";
-    SSH_AUTH_SOCK="/home/jonathan/.bitwarden-ssh-agent.sock";
+    SSH_AUTH_SOCK = "/home/jonathan/.bitwarden-ssh-agent.sock";
   };
 
   home.file.podman_registries = {
@@ -23,16 +29,54 @@
     '';
     target = "${config.home.homeDirectory}/.config/containers/registries.conf";
   };
-  
-  dconf.settings = {
-    "org/gnome/desktop/background" = {
-      picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+
+  dconf.settings = with lib.gvariant; {
+    "org/gnome/desktop/background".picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    "org/gnome/desktop/peripherals/keyboard".numlock-state = true;
+    "org/gnome/desktop/input-sources".sources = mkArray [( mkTuple ["xkb" "gb"])];
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    "org/gnome/desktop/session".idle-delay = mkUint32 0;
+    "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type="nothing";
+    "org/gnome/settings-daemon/plugins/power".power-button-action="interactive";
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        appindicator.passthru.extensionUuid
+        system-monitor.passthru.extensionUuid
+        wireless-hid.passthru.extensionUuid
+      ];
     };
-    "org/gnome/desktop/peripherals/keyboard" = {
-      numlock-state = true;
-    };
-    "desktop/interface" = {
-      color-scheme = "prefer-dark";
+    "com/libertyzero/gnome-encfs-manager".stashes = mkArray [
+        (mkTuple [
+          "/home/jonathan/.Private"
+          "/home/jonathan/Private"
+          false
+          false
+          false
+          false
+          false
+          (mkInt32 5)
+          true
+          ".encfs6.xml"
+          false
+          ""
+        ])
+      ];
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+        "discord.desktop"
+        "code.desktop"
+        "com.usebottles.bottles.desktop"
+        "com.mitchellh.ghostty.desktop"
+      ];
     };
   };
+
+  home.packages = with pkgs; [
+    gnomeExtensions.appindicator
+    gnomeExtensions.system-monitor
+    gnomeExtensions.wireless-hid
+  ];
 }

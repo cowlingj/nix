@@ -1,21 +1,4 @@
-{ config, pkgs, ... }: {
-
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
-  # Graphics
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  services.xserver.videoDrivers = ["nvidia"];
-
+{ pkgs, ... }: {
   # Users
   users.users.jonathan = {
     isNormalUser = true;
@@ -45,4 +28,11 @@
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "jonathan";
+
+  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
+
+  services.fwupd.daemonSettings.DisabledPlugins = [ "synaptics_mst" ];
+  services.fwupd.extraRemotes = [ "lvfs-testing" ];
 }

@@ -10,7 +10,37 @@
       react-devtools
       stylus
       pwas-for-firefox
+      translate-web-pages
+      search-by-image
     ];
+    bookmarks = {
+      force = true;
+      settings = [
+        {
+          name = "Toolbar";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "TTRPG";
+              bookmarks = [
+                {
+                  name = "Spelljammer";
+                  tags = [ "D&D" "TTRPG" "foundry" ];
+                  keyword = "Spelljammer";
+                  url = "http://87.115.224.246:30000/game";
+                }
+                {
+                  name = "D&D Beyond";
+                  tags = [ "D&D" "TTRPG" ];
+                  keyword = "D&D Beyond";
+                  url = "https://www.dndbeyond.com/";
+                }
+              ];
+            }            
+          ];
+        }
+      ];
+    };
   };
   programs.firefox.nativeMessagingHosts = [
     pkgs.firefoxpwa

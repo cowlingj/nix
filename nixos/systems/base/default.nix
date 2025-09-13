@@ -1,10 +1,12 @@
-{ inputs, config, pkgs, hostname, lib, ... }:
-
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
+  inputs,
+  config,
+  pkgs,
+  hostname,
+  lib,
+  ...
+}:
+{
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,20 +37,42 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.defaultSession = "gnome";
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
+  environment.gnome.excludePackages = (
+    with pkgs;
+    [
+      atomix
+      cheese
+      epiphany
+      evince
+      geary
+      gedit
+      gnome-characters
+      gnome-music
+      gnome-photos
+      gnome-terminal
+      gnome-tour
+      hitori
+      iagno
+      tali
+      totem
+      gnome-tour
+      gnome-user-docs
+      gnome-software
+      gnome-weather
+      gnome-maps
+      gnome-contacts
+      yelp
+      snapshot
+    ]
+  );
 
-  # remove default packages
-  environment.gnome.excludePackages = with pkgs; [
-     gnome-maps
-     gnome-weather
-     gnome-user-docs
-     epiphany
-     gnome-tour
-     gnome-terminal
-     totem
-  ];
+  programs.ssh.startAgent = false;
+  services.gnome.gcr-ssh-agent.enable = false;
+
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Configure keymap in X11
@@ -101,12 +125,16 @@
     vim
     wl-clipboard
     fprintd
-    ghostty
     lvm2
-    usbutils
-    showtime # like totem but not broken
     vscode
     nil
+    nixfmt-rfc-style
+    findutils
+    busybox
+    usbutils
+    ghostty
+    gnome-tweaks
+    gnome-settings-daemon
   ];
 
   services.flatpak.enable = true;
@@ -114,27 +142,28 @@
   virtualisation.podman = {
     enable = true;
     defaultNetwork.settings = {
-        dns_enabled = true;
+      dns_enabled = true;
     };
   };
   systemd.services.podman.enable = false;
   systemd.sockets.podman.enable = false;
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      experimental-features = "nix-command flakes";
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # channel.enable = false;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        experimental-features = "nix-command flakes";
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
 
-    # make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   system.stateVersion = "24.11";
 }

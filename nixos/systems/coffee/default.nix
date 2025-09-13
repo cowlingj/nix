@@ -16,25 +16,6 @@
 
   services.xserver.videoDrivers = ["nvidia"];
 
-  # Users
-  users.users.jonathan = {
-    isNormalUser = true;
-    description = "Jonathan";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-    subUidRanges = [
-      {
-        count = 65536;
-        startUid = 100000;
-      }
-    ];
-    subGidRanges = [
-      {
-        count = 65536;
-        startGid = 100000;
-      }
-    ];
-  };
   users.users.claudia = {
     isNormalUser = true;
     description = "Claudia";
@@ -44,5 +25,5 @@
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "jonathan";
+  services.displayManager.autoLogin.user = "claudia";
 }
