@@ -10,4 +10,5 @@
     git-crypt
     usbimager
   ];
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 }

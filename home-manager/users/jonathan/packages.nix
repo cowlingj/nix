@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.flatpak.enable = true;
   services.flatpak.packages = [
     "com.usebottles.bottles"
@@ -19,17 +20,19 @@
     # communcation
     discord
     discover-overlay
-    
+
     # utility
     google-chrome
     obsidian
     unar
     p7zip-rar
+    unrar
     xarchiver
     curl
     protonvpn-gui
     libwacom
     showtime
+    ventoy-full-gtk
 
     # privacy
     bitwarden-desktop
@@ -59,5 +62,9 @@
 
     # games
     prismlauncher
+  ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-gtk3-1.1.07"
   ];
 }

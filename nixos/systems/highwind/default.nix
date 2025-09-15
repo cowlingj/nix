@@ -49,5 +49,6 @@
     with pkgs;
     [
       gnome-software
-    ];
+    ]
+  );
 }

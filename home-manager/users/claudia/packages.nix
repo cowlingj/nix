@@ -24,12 +24,11 @@
     # utility
     firefox
     obsidian
-    notion-app
     curl
     protonvpn-gui
     libwacom
     vlc
-    cabibre
+    calibre
     pdfarranger
     evince
     libreoffice-still
