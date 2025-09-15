@@ -1,9 +1,12 @@
+# NixOS and Home Manager Configuration
 
+## Getting Started
 
+1. Setup Home Manager
+`nix run nix-community/home-manager/release-25.05 -- init --switch`
 
-- `nixos-rebuild --flake .#your-hostname`
-- `systemctl status "home-manager-$USER.service"`
-- `home-manager --flake .#your-username@your-hostname`
+2. Deploy system
+`nixos-rebuild switch --flake .#your-hostname`
 
-
-inspired by: https://github.com/Misterio77/nix-starter-configs
+3. Deploy Home Manager Configiguration
+`home-manager switch --flake .#your-username@your-hostname`
