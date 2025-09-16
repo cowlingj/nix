@@ -36,41 +36,7 @@
   # Enable the X11 windowing system. (x session is still wayland)
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.displayManager.defaultSession = "gnome";
-  services.udev.packages = [ pkgs.gnome-settings-daemon ];
-  environment.gnome.excludePackages = (
-    with pkgs;
-    [
-      atomix
-      cheese
-      epiphany
-      evince
-      geary
-      gedit
-      gnome-characters
-      gnome-music
-      gnome-photos
-      gnome-terminal
-      gnome-tour
-      hitori
-      iagno
-      tali
-      totem
-      gnome-tour
-      gnome-user-docs
-      gnome-weather
-      gnome-maps
-      gnome-contacts
-      yelp
-      snapshot
-    ]
-  );
-
   programs.ssh.startAgent = false;
-  services.gnome.gcr-ssh-agent.enable = false;
 
   services.xserver.excludePackages = [ pkgs.xterm ];
 
