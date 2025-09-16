@@ -134,6 +134,7 @@
         options = "--delete-older-than 7d";
       };
     };
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
   system.stateVersion = "24.11";
 }
