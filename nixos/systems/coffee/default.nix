@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
 
   imports = [
@@ -32,8 +32,5 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = "plasma";
-  # environment.systemPackages = with pkgs; [
-  #  kdePackages.partitionmanager
-  # ];
   programs.partition-manager.enable = true;
 }
