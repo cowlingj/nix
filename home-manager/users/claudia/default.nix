@@ -28,4 +28,8 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.wireless-hid
   ];
+
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "/home/claudia/.bitwarden-ssh-agent.sock";
+  };
 }
