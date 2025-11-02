@@ -5,6 +5,7 @@
     "com.usebottles.bottles"
     "com.github.tchx84.Flatseal"
     "com.bambulab.BambuStudio"
+    "org.freecad.FreeCAD"
   ];
   services.flatpak.uninstallUnmanaged = true;
   programs.zsh.enable = true;
@@ -54,7 +55,6 @@
 
     # design
     krita
-    freecad
     openscad
     godot_4
     blender
