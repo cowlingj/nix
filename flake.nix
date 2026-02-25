@@ -15,6 +15,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       ...
     }@inputs:
@@ -71,6 +72,7 @@
               outputs
               system
               ;
+            pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
           };
           modules = [
             inputs.nix-flatpak.homeManagerModules.nix-flatpak

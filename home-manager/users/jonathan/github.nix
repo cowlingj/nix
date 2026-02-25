@@ -9,13 +9,14 @@ in
   };
   programs.git = {
     enable = true;
-    userName  = "cowlingj";
-    userEmail = "19248800+cowlingj@users.noreply.github.com";
-    extraConfig = {
+    settings = {
+      user.name  = "cowlingj";
+      user.email = "19248800+cowlingj@users.noreply.github.com";
       gpg.format = "ssh";
       # user.signingkey = config.home.file.github_ssh_key.target;
       push = { autoSetupRemote = true; };
       init.defaultBranch = "main";
+
     };
   };
   programs.ssh.matchBlocks.github = {

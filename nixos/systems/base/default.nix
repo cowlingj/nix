@@ -104,14 +104,15 @@
 
   services.flatpak.enable = true;
 
-  virtualisation.podman = {
-    enable = true;
-    defaultNetwork.settings = {
-      dns_enabled = true;
-    };
-  };
-  systemd.services.podman.enable = false;
-  systemd.sockets.podman.enable = false;
+  # virtualisation.containers.enable = true;
+  # virtualisation.podman = {
+  #   enable = true;
+  #   defaultNetwork.settings = {
+  #     dns_enabled = true;
+  #   };
+  # };
+  # systemd.services.podman.enable = false;
+  # systemd.sockets.podman.enable = false;
 
   nix =
     let

@@ -11,6 +11,14 @@
 3. Deploy Home Manager Configiguration
 `home-manager switch --flake .#your-username@your-hostname`
 
+4. Update packages
+`nix flake update`
+
+> Clear generations
+> nix profile history --profile /nix/var/nix/profiles/system
+> sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 3d
+> nix-store --gc
+
 ## Secrets
 
 files with .token or .secret are encrypted with git-crypt using a symmetric key.

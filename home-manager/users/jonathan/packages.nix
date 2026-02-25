@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, config, ... }:
 {
   services.flatpak.enable = true;
   services.flatpak.packages = [
@@ -8,11 +8,13 @@
     "org.freecad.FreeCAD"
   ];
   services.flatpak.uninstallUnmanaged = true;
+  services.podman.enable = true;
   programs.zsh.enable = true;
   programs.zsh.initContent = ''
     bindkey -v
     bindkey '^R' history-incremental-search-backward
   '';
+  programs.zsh.dotDir = "${config.xdg.configHome}/zsh";
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -45,7 +47,7 @@
     vscode
     bruno
     bruno-cli
-    podman
+    # podman
     podman-desktop
     podman-compose
     lunacy
@@ -54,8 +56,8 @@
     pcsx2
 
     # design
-    krita
-    openscad
+    pkgs-stable.krita
+    pkgs-stable.openscad
     godot_4
     blender
     pixelorama
@@ -65,6 +67,6 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-gtk3-1.1.07"
+    "ventoy-gtk3-1.1.10"
   ];
 }

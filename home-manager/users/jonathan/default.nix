@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -22,13 +21,13 @@
     SSH_AUTH_SOCK = "/home/jonathan/.bitwarden-ssh-agent.sock";
   };
 
-  home.file.podman_registries = {
-    enable = true;
-    text = ''
-      unqualified-search-registries = ["docker.io"]
-    '';
-    target = "${config.home.homeDirectory}/.config/containers/registries.conf";
-  };
+  # home.file.podman_registries = {
+  #   enable = true;
+  #   text = ''
+  #     unqualified-search-registries = ["docker.io"]
+  #   '';
+  #   target = "${config.home.homeDirectory}/.config/containers/registries.conf";
+  # };
 
   dconf.settings = with lib.gvariant; {
     "org/gnome/desktop/background".picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
