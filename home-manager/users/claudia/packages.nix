@@ -22,10 +22,9 @@
     signal-desktop
     
     # utility
-    firefox
     obsidian
     curl
-    protonvpn-gui
+    proton-vpn
     libwacom
     vlc
     calibre

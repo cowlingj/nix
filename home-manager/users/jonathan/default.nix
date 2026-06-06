@@ -17,8 +17,11 @@
   home.homeDirectory = "/home/jonathan";
 
   home.sessionVariables = {
-    DOCKER_HOST = "unix://1000/podman/podman.sock";
+    DOCKER_HOST = "unix://run/user/1000/podman/podman.sock";
     SSH_AUTH_SOCK = "/home/jonathan/.bitwarden-ssh-agent.sock";
+    # Make GTK3 file-chooser settings discoverable
+    # per https://github.com/NixOS/nixpkgs/issues/467783#issuecomment-3648708206
+    GSETTINGS_SCHEMA_DIR ="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
   };
 
   # home.file.podman_registries = {

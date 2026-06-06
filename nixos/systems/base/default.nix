@@ -93,7 +93,7 @@
     lvm2
     vscode
     nil
-    nixfmt-rfc-style
+    nixfmt
     findutils
     busybox
     usbutils
@@ -104,26 +104,19 @@
 
   services.flatpak.enable = true;
 
-  # virtualisation.containers.enable = true;
-  # virtualisation.podman = {
-  #   enable = true;
-  #   defaultNetwork.settings = {
-  #     dns_enabled = true;
-  #   };
-  # };
-  # systemd.services.podman.enable = false;
-  # systemd.sockets.podman.enable = false;
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
     in
     {
+      optimise.automatic = true;
       settings = {
+        auto-optimise-store = true;
         experimental-features = "nix-command flakes";
         flake-registry = "";
         # Workaround for https://github.com/NixOS/nix/issues/9574
         nix-path = config.nix.nixPath;
+        download-buffer-size = 512 * 1024 * 1024;
       };
 
       # make flake registry and nix path match flake inputs
@@ -135,7 +128,6 @@
         options = "--delete-older-than 7d";
       };
     };
-  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
   system.stateVersion = "24.11";
 }

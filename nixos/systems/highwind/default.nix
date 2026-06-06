@@ -20,7 +20,7 @@
   users.users.jonathan = {
     isNormalUser = true;
     description = "Jonathan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman"];
     shell = pkgs.zsh;
     subUidRanges = [
       {
@@ -41,6 +41,11 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
   };
+  users.groups.podman = {
+    gid=976;
+  };
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "jonathan" ];
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;

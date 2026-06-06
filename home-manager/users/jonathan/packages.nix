@@ -5,10 +5,18 @@
     "com.usebottles.bottles"
     "com.github.tchx84.Flatseal"
     "com.bambulab.BambuStudio"
-    "org.freecad.FreeCAD"
+    # "org.freecad.FreeCAD"
+    "com.icons8.Lunacy"
+    "org.raspberrypi.rpi-imager"
   ];
   services.flatpak.uninstallUnmanaged = true;
   services.podman.enable = true;
+  systemd.user.targets.podman = {
+    Install.WantedBy = ["default.target"];
+    Unit = {
+      Wants = ["podman.service"];
+    };
+  };
   programs.zsh.enable = true;
   programs.zsh.initContent = ''
     bindkey -v
@@ -32,7 +40,7 @@
     unrar
     xarchiver
     curl
-    protonvpn-gui
+    proton-vpn
     libwacom
     showtime
     ventoy-full-gtk
@@ -47,10 +55,8 @@
     vscode
     bruno
     bruno-cli
-    # podman
     podman-desktop
     podman-compose
-    lunacy
 
     # emulation
     pcsx2
@@ -61,12 +67,15 @@
     godot_4
     blender
     pixelorama
+    freecad
+    inkscape
 
     # games
     prismlauncher
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-gtk3-1.1.10"
+    "ventoy-gtk3-1.1.12"
+    "electron-39.8.10"
   ];
 }

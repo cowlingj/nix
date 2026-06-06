@@ -1,5 +1,6 @@
-{ inputs, pkgs, system, ... }: {
+{ inputs, pkgs, system, config, ... }: {
   programs.firefox.enable = true;
+  programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   programs.firefox.profiles.default = {
     id = 0;
     name = "default";
@@ -9,7 +10,7 @@
       ublock-origin
       react-devtools
       stylus
-      pwas-for-firefox
+      # pwas-for-firefox
       translate-web-pages
       search-by-image
     ];
@@ -42,7 +43,7 @@
       ];
     };
   };
-  programs.firefox.nativeMessagingHosts = [
-    pkgs.firefoxpwa
-  ];
+  # programs.firefox.nativeMessagingHosts = [
+  #   pkgs.firefoxpwa
+  # ];
 }
