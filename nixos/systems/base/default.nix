@@ -77,6 +77,10 @@
   programs.firefox.enable = true;
   programs.steam.enable = true;
   programs.zsh.enable = true;
+  programs.zsh.interactiveShellInit = ''
+    bindkey -v
+    bindkey '^R' history-incremental-search-backward
+  '';
   environment.pathsToLink = [ "/share/zsh" ];
   programs.appimage = {
     enable = true;
@@ -114,8 +118,6 @@
         auto-optimise-store = true;
         experimental-features = "nix-command flakes";
         flake-registry = "";
-        # Workaround for https://github.com/NixOS/nix/issues/9574
-        nix-path = config.nix.nixPath;
         download-buffer-size = 512 * 1024 * 1024;
       };
 

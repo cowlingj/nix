@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     firefox-addons.url = "git+https://gitlab.com/rycee/nur-expressions.git?dir=/pkgs/firefox-addons";
@@ -39,14 +39,16 @@
             ./nixos/systems/highwind
           ];
         };
-        "tempest" = nixpkgs.lib.nixosSystem {
+        "excalibur" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
-            hostname = "tempest";
+            hostname = "excalibur";
           };
           modules = [
             ./nixos/systems/base
-            ./nixos/systems/tempest
+            ./nixos/systems/excalibur
+            ./nixos/users/base
+            ./nixos/users/jonathan
           ];
         };
         "coffee" = nixpkgs.lib.nixosSystem {
