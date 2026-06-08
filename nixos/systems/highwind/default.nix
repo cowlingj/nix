@@ -44,8 +44,6 @@
   users.groups.podman = {
     gid=976;
   };
-  # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ "jonathan" ];
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;

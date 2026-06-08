@@ -2,7 +2,6 @@
   inputs,
   config,
   pkgs,
-  hostname,
   lib,
   ...
 }:
@@ -12,7 +11,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
-  networking.hostName = "${hostname}";
   networking.networkmanager.enable = true;
 
   # Set your time zone.

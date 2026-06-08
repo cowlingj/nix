@@ -88,10 +88,5 @@
     };
   };
 
-  programs.zsh.loginShellInit = ''
-    [ "$USER" == 'jonathan' ] && export DOCKER_HOST = "unix://run/user/1000/podman/podman.sock";
-    [ "$USER" == 'jonathan' ] && export SSH_AUTH_SOCK = "/home/jonathan/.bitwarden-ssh-agent.sock";
-  '';
-
   system.stateVersion = "24.11";
 }

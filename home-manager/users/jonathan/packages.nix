@@ -62,8 +62,8 @@
     pcsx2
 
     # design
-    pkgs-stable.krita
-    pkgs-stable.openscad
+    krita
+    openscad
     godot_4
     blender
     pixelorama
@@ -73,10 +73,5 @@
     # games
     prismlauncher
     foundryvtt-wrapper
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-gtk3-1.1.12"
-    "electron-39.8.10"
   ];
 }

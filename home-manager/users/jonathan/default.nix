@@ -24,14 +24,6 @@
     GSETTINGS_SCHEMA_DIR ="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
   };
 
-  # home.file.podman_registries = {
-  #   enable = true;
-  #   text = ''
-  #     unqualified-search-registries = ["docker.io"]
-  #   '';
-  #   target = "${config.home.homeDirectory}/.config/containers/registries.conf";
-  # };
-
   dconf.settings = with lib.gvariant; {
     "org/gnome/desktop/background".picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
     "org/gnome/desktop/peripherals/keyboard".numlock-state = true;
