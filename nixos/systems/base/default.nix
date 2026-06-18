@@ -91,12 +91,13 @@
 
   environment.systemPackages = with pkgs; [
     git
+    git-lfs
     vim
     wl-clipboard
     fprintd
     lvm2
     vscode
-    nil
+    nixd
     nixfmt
     findutils
     busybox

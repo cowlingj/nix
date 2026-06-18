@@ -16,7 +16,7 @@ in
       # user.signingkey = config.home.file.github_ssh_key.target;
       push = { autoSetupRemote = true; };
       init.defaultBranch = "main";
-
+      filter.lfs.clean = "git-lfs clean -- %f";
     };
   };
   programs.ssh.matchBlocks.github = {

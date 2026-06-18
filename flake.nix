@@ -78,6 +78,7 @@
           };
           modules = [
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
+            ./packages/foundryvtt
             ./home-manager/users/base
             ./home-manager/users/jonathan
           ];

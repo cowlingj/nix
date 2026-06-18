@@ -86,9 +86,13 @@
   );
   services.gnome.gcr-ssh-agent.enable = false;
 
-  networking.firewall = {
+  networking.firewall = let
+    minecraft = { tcp = false; udp = false; port = 25565; }; # TCP & UDP
+    foundry = { tcp = false; udp = false; port = 30000; }; # TCP
+    allowedTCPPorts = map (it: it.port) (builtins.filter (it: it.tcp) [minecraft foundry]);
+    allowedUDPPorts = map (it: it.port) (builtins.filter (it: it.udp) [minecraft foundry]);
+  in {
+    inherit allowedTCPPorts allowedUDPPorts;
     enable = true;
-    allowedTCPPorts = [ 25565 ];
-    allowedUDPPorts = [ 25565 ];
   };
 }

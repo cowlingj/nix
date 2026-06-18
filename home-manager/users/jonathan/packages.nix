@@ -72,6 +72,7 @@
 
     # games
     prismlauncher
+    foundryvtt-wrapper
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
