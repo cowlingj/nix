@@ -35,21 +35,11 @@
       }
     ];
   };
-  users.users.claudia = {
-    isNormalUser = true;
-    description = "Claudia";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-  };
   users.groups.podman = {
     gid=976;
   };
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "jonathan";
-
-    # Enable the GNOME Desktop Environment.
+  # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   services.displayManager.defaultSession = "gnome";

@@ -9,7 +9,6 @@
     ./packages.nix
     ./github.nix
     # ./sirikali.nix
-    ./duck-dns.nix
   ];
 
   programs.home-manager.enable = true;

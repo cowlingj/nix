@@ -27,63 +27,94 @@
 
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixosConfigurations = {
+      nixosConfigurations = rec {
         "highwind" = nixpkgs.lib.nixosSystem {
+          networking.hostName = "highwind";
+          nixpkgs.config.permittedInsecurePackages = [
+            "ventoy-gtk3-1.1.12"
+            "electron-39.8.10"
+          ];
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
             ./nixos/systems/base
             ./nixos/systems/highwind
-            {
-              networking.hostName = "highwind";
+            home-manager.nixosModules.home-manager {
+              home-manager.extraSpecialArgs = {
+                inherit inputs system;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jonathan = {
+                imports = [
+                  inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                  ./home-manager/users/base
+                  ./home-manager/users/jonathan
+                  ./home-manager/users/jonathan/duck-dns.nix
+                ];
+              };
             }
           ];
         };
         "excalibur" = nixpkgs.lib.nixosSystem {
+          networking.hostName = "excalibur";           
+          nixpkgs.config.permittedInsecurePackages = [
+            "ventoy-gtk3-1.1.12"
+            "electron-39.8.10"
+          ];
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
             ./nixos/systems/base
             ./nixos/systems/excalibur
-            {
-              nixpkgs.config.permittedInsecurePackages = [
-                "ventoy-gtk3-1.1.12"
-                "electron-39.8.10"
-              ];
+            home-manager.nixosModules.home-manager {
+              home-manager.extraSpecialArgs = {
+                inherit inputs system;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jonathan = {
+                imports = [
+                  inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                  ./packages/foundryvtt
+                  ./home-manager/users/base
+                  ./home-manager/users/jonathan
+                ];
+              };
             }
-            {
-              networking.hostName = "excalibur";
-            }
-            home-manager.nixosModules.home-manager (
-              {lib, ...}: {
-                home-manager.extraSpecialArgs = {
-                  inherit inputs system;
-                };
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.jonathan = {
-                  imports = [
-                    inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                    ./home-manager/users/base
-                    ./home-manager/users/jonathan
-                  ];
-                  systemd.user.timers."duck-dns".Install.WantedBy = lib.mkForce [ ];
-                };
-              }
-            )
           ];
         };
         "coffee" = nixpkgs.lib.nixosSystem {
           specialArgs = {
+          networking.hostName = "coffee";
             inherit inputs outputs;
           };
           modules = [
             ./nixos/systems/base
             ./nixos/systems/coffee
-            {
-              networking.hostName = "coffee";
+          ];
+        };
+        "coffee2" = nixpkgs.lib.nixosSystem {
+          networking.hostName = "coffee";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = coffee.modules ++ [
+            home-manager.nixosModules.home-manager {
+              home-manager.extraSpecialArgs = {
+                inherit inputs system;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.claudia = {
+                imports = [
+                  inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                  ./home-manager/users/base
+                  ./home-manager/users/claudia
+                ];
+              };
             }
           ];
         };
@@ -92,44 +123,6 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "jonathan@highwind" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit
-              inputs
-              outputs
-              system
-              ;
-            pkgs-stable = nixpkgs.legacyPackages.x86_64-linux;
-          };
-          modules = [
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-            ./packages/foundryvtt
-            ./home-manager/users/base
-            ./home-manager/users/jonathan
-            {
-              nixpkgs.config.permittedInsecurePackages = [
-                "ventoy-gtk3-1.1.12"
-                "electron-39.8.10"
-              ];
-            }
-          ];
-        };
-        "claudia@highwind" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit
-              inputs
-              outputs
-              system
-              ;
-          };
-          modules = [
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-            ./home-manager/users/base
-            ./home-manager/users/claudia
-          ];
-        };
         "claudia@coffee" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {

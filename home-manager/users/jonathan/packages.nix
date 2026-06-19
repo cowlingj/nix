@@ -72,6 +72,5 @@
 
     # games
     prismlauncher
-    foundryvtt-wrapper
   ];
 }
