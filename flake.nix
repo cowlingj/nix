@@ -29,15 +29,17 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = rec {
         "highwind" = nixpkgs.lib.nixosSystem {
-          networking.hostName = "highwind";
-          nixpkgs.config.permittedInsecurePackages = [
-            "ventoy-gtk3-1.1.12"
-            "electron-39.8.10"
-          ];
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
+            {
+              networking.hostName = "highwind";
+              nixpkgs.config.permittedInsecurePackages = [
+                "ventoy-gtk3-1.1.12"
+                "electron-39.8.10"
+              ];
+            }
             ./nixos/systems/base
             ./nixos/systems/highwind
             home-manager.nixosModules.home-manager {
@@ -58,15 +60,17 @@
           ];
         };
         "excalibur" = nixpkgs.lib.nixosSystem {
-          networking.hostName = "excalibur";           
-          nixpkgs.config.permittedInsecurePackages = [
-            "ventoy-gtk3-1.1.12"
-            "electron-39.8.10"
-          ];
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
+            {
+              networking.hostName = "excalibur";           
+              nixpkgs.config.permittedInsecurePackages = [
+                "ventoy-gtk3-1.1.12"
+                "electron-39.8.10"
+              ];
+            }
             ./nixos/systems/base
             ./nixos/systems/excalibur
             home-manager.nixosModules.home-manager {
@@ -88,20 +92,20 @@
         };
         "coffee" = nixpkgs.lib.nixosSystem {
           specialArgs = {
-          networking.hostName = "coffee";
             inherit inputs outputs;
           };
           modules = [
+            { networking.hostName = "coffee"; }
             ./nixos/systems/base
             ./nixos/systems/coffee
           ];
         };
         "coffee2" = nixpkgs.lib.nixosSystem {
-          networking.hostName = "coffee";
           specialArgs = {
             inherit inputs outputs;
           };
           modules = coffee.modules ++ [
+            { networking.hostName = "coffee"; }
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit inputs system;
