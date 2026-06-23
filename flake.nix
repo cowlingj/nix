@@ -42,6 +42,7 @@
             }
             ./nixos/systems/base
             ./nixos/systems/highwind
+            ./nixos/systems/highwind/duck-dns.nix
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit inputs system;
@@ -53,7 +54,6 @@
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                   ./home-manager/users/base
                   ./home-manager/users/jonathan
-                  ./home-manager/users/jonathan/duck-dns.nix
                 ];
               };
             }

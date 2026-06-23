@@ -5,9 +5,7 @@
     "com.usebottles.bottles"
     "com.github.tchx84.Flatseal"
     "com.bambulab.BambuStudio"
-    # "org.freecad.FreeCAD"
     "com.icons8.Lunacy"
-    "org.raspberrypi.rpi-imager"
   ];
   services.flatpak.uninstallUnmanaged = true;
   services.podman.enable = true;
@@ -69,6 +67,7 @@
     pixelorama
     freecad
     inkscape
+    rpi-imager
 
     # games
     prismlauncher
