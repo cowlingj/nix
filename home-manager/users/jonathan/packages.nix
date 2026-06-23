@@ -31,6 +31,7 @@
     discover-overlay
 
     # utility
+    dconf-editor
     google-chrome
     obsidian
     unar
