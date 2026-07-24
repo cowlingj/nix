@@ -104,8 +104,15 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = coffee.modules ++ [
+          modules = [
             { networking.hostName = "coffee"; }
+            ./nixos/systems/base
+            ./nixos/systems/coffee
+            {
+              nixpkgs.config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
+            }
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit inputs system;
