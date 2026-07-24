@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   programs.firefox.enable = true;
   programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   services.flatpak.enable = true;
