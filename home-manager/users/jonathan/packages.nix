@@ -69,8 +69,10 @@
     freecad
     inkscape
     rpi-imager
+    seamly2d
 
     # games
     prismlauncher
+    nexusmods-app-unfree
   ];
 }

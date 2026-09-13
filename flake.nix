@@ -38,6 +38,7 @@
               nixpkgs.config.permittedInsecurePackages = [
                 "ventoy-gtk3-1.1.12"
                 "electron-39.8.10"
+                "nexusmods-app-unfree-0.21.1"
               ];
             }
             ./nixos/systems/base
@@ -120,6 +121,14 @@
                 ];
               };
             }
+          ];
+        };
+
+        radiant-garden = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            { networking.hostName = "radiant-garden"; }
+            ./nixos/systems/radiant-garden
           ];
         };
       };
