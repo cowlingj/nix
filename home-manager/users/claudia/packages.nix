@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   programs.firefox.enable = true;
+  programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   services.flatpak.enable = true;
   services.flatpak.packages = [
     "com.github.tchx84.Flatseal"
@@ -17,9 +18,11 @@
   };
   home.packages = with pkgs; [
     # communcation
-    discord
     discover-overlay
-    signal-desktop
+    #signal-desktop
+
+    # games
+    prismlauncher
     
     # utility
     obsidian
@@ -32,6 +35,8 @@
     evince
     libreoffice-still
     flatpak
+    zotero
+    blanket
 
     # privacy
     bitwarden-desktop
@@ -42,6 +47,7 @@
 
     # design
     krita
+    jellyfin-ffmpeg
 
     # remote file handling
     qbittorrent
@@ -49,5 +55,7 @@
     p7zip-rar
     xarchiver
     dropbox
+    switcheroo
+    foliate
   ];
 }
