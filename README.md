@@ -3,9 +3,12 @@
 ## Getting Started
 
 1. Deploy system
-`nixos-rebuild switch --flake .#your-hostname`
+`nixos-rebuild switch --flake .#<your-iso>`
 
-2. Update packages
+2. Deploy iso
+`nix build .#isoImages.<your-iso>.config.system.build.isoImage`
+
+3. Update packages
 `nix flake update`
 
 > Clear generations

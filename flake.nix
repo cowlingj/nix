@@ -105,15 +105,8 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [
+          modules = coffee.modules ++ [
             { networking.hostName = "coffee"; }
-            ./nixos/systems/base
-            ./nixos/systems/coffee
-            {
-              nixpkgs.config.permittedInsecurePackages = [
-                "electron-39.8.10"
-              ];
-            }
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit inputs system;
@@ -159,5 +152,30 @@
           ];
         };
       };
+
+
+      isoImages = {
+        radiant-garden-installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            { networking.hostName = "radiant-garden-installer"; }
+            ({ modulesPath, ... }: {
+              imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
+            })
+            {
+              system.autoUpgrade = {
+                enable = true;
+                flake = "github:cowlingj/nix-config#radiant-garden";
+                allowReboot = true;
+                dates = "05:00";
+                runGarbageCollection = true;
+              };
+
+              system.stateVersion = "24.11";
+            }
+          ];
+        };
+      };
+
     };
 }
