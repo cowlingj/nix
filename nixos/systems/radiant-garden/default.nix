@@ -89,6 +89,16 @@
     };
   };
 
+  services.avahi = {
+    enable = true;
+    publish = {
+      enable = true;
+      domain = true;
+      addresses = true;
+      userServices = true;
+    };
+  };
+
     services.openssh = {
       enable = true;
       ports = [ 22 ];
