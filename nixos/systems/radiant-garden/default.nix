@@ -5,6 +5,11 @@
   ...
 }: {
 
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -132,7 +137,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    flake = "github:cowlingj/nix-config#radiant-garden";
+    flake = "github:cowlingj/nix#radiant-garden";
     allowReboot = true;
     dates = "05:00";
     runGarbageCollection = true;
