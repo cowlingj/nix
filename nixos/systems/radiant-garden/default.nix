@@ -127,7 +127,7 @@
       group = "server";
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" "podman" ];
-      shell = pkgs.zsh;
+      # shell = pkgs.zsh;
       subUidRanges = [
         {
           count = 65536;
