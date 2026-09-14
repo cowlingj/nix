@@ -137,8 +137,8 @@
         }
       ];
       openssh = {
-        authorizedKeys.keys = [
-          import ./public-key.nix
+        authorizedKeys.keys = let publicKey = import ./public-key.nix; in [
+          publicKey
         ];
       };
     };
