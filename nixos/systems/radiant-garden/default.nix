@@ -68,7 +68,7 @@
   ];
 
   nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    # flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in
   {
     optimise.automatic = true;
@@ -79,9 +79,9 @@
       download-buffer-size = 512 * 1024 * 1024;
     };
 
-    # make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    # # make flake registry and nix path match flake inputs
+    # registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+    # nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     gc = {
       automatic = true;
       dates = "weekly";
