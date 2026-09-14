@@ -137,7 +137,7 @@
         }
       ];
       openssh = {
-        authorizedKeys = [
+        authorizedKeys.keys = [
           import ./public-key.nix
         ];
       };
