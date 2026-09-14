@@ -102,16 +102,9 @@
     services.openssh = {
       enable = true;
       ports = [ 22 ];
-      knownHosts = {
-        "jonathan" = let publicKey = import ./public-key.nix; in {
-          inherit publicKey;
-          hostNames = [ "coffee" "highwind" "excalibur" ];
-        };
-      };
       settings = {
         PasswordAuthentication = false;
       };
-      
     };
 
     virtualisation.podman = {
@@ -143,6 +136,11 @@
           startGid = 100000;
         }
       ];
+      openssh = {
+        authorizedKeys = [
+          import ./public-key.nix
+        ];
+      };
     };
 
   system.autoUpgrade = {

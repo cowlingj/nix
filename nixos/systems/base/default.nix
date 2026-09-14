@@ -129,6 +129,9 @@
         options = "--delete-older-than 7d";
       };
     };
+  
+  services.avahi.nssmdns4 = true;
+  services.avahi.nssmdns6 = true;
 
   system.stateVersion = "24.11";
 }
