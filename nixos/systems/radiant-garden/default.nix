@@ -65,7 +65,7 @@
     findutils
     busybox
     usbutils
-    gpg
+    gnupg
   ];
 
   nix = let
