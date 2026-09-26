@@ -49,6 +49,7 @@
     bitwarden-cli
     encfs
     gencfsm
+    gnupg
 
     # development
     vscode

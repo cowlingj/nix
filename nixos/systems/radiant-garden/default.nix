@@ -66,6 +66,7 @@
     busybox
     usbutils
     gnupg
+    python3
   ];
 
   nix = let
