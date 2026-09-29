@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    foundryvtt-wrapper
-  ];
   nixpkgs.overlays = [
     (final: prev: {
       foundryvtt =

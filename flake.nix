@@ -15,6 +15,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       ...
     }@inputs:
@@ -40,21 +41,28 @@
                 "electron-39.8.10"
                 "nexusmods-app-unfree-0.21.1"
               ];
+              nixpkgs.overlays = [
+                (final: prev: { unstable = nixpkgs-unstable.legacyPackages.${system}; })
+              ];
             }
             ./nixos/systems/base
             ./nixos/systems/highwind
             ./nixos/systems/highwind/duck-dns.nix
+            ./packages/foundryvtt
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit inputs system;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.jonathan = {
+              home-manager.users.jonathan = {pkgs, ...}: {
                 imports = [
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                   ./home-manager/users/base
                   ./home-manager/users/jonathan
+                ];
+                home.packages = [
+                  pkgs.foundryvtt-wrapper
                 ];
               };
             }
@@ -83,7 +91,6 @@
               home-manager.users.jonathan = {
                 imports = [
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                  ./packages/foundryvtt
                   ./home-manager/users/base
                   ./home-manager/users/jonathan
                 ];

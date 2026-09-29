@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, pkgs-unstable, ... }:
 {
   services.flatpak.enable = true;
   services.flatpak.packages = [
@@ -56,7 +56,7 @@
     bruno
     bruno-cli
     podman-desktop
-    podman-compose
+    pkgs.unstable.podman-compose
 
     # emulation
     pcsx2
